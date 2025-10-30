@@ -12,6 +12,7 @@ import net.ecommerce.microservices.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,8 +77,27 @@ public class CartService {
 
 
     }
-    public List<CartResponseDto> retrieveUserCart(String userId) {
-    userRepository.findById(Long.valueOf(userId));
 
+    public List<CartItem> retrieveUserCart(String userId) {
+//        User user = userRepository.findById(Long.valueOf(userId))
+//                .orElseThrow(() -> new RuntimeException("User Not Found"));
+//
+//        List<CartItem> cartItems = cartRepository.findAllByUser(user);
+//
+//        return cartItems.stream()
+//                .map(this::mapToCartResponse)
+//                .collect(Collectors.toList());
+
+        return userRepository.findById(Long.valueOf(userId)).map(cartRepository::findByUser).orElseGet(List::of);
     }
+
+    private CartResponseDto mapToCartResponse(CartItem cartItem) {
+        CartResponseDto cartResponseDto = new CartResponseDto();
+        cartResponseDto.setUser(cartItem.getUser());
+        cartResponseDto.setProduct(Collections.singletonList(cartItem.getProduct()));
+        cartResponseDto.setPrice(cartItem.getPrice());
+        cartResponseDto.setQuantity(cartItem.getQuantity());
+        return cartResponseDto;
+    }
+
 }

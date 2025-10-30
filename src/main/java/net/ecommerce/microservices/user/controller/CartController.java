@@ -3,6 +3,7 @@ package net.ecommerce.microservices.user.controller;
 import lombok.RequiredArgsConstructor;
 import net.ecommerce.microservices.user.dto.CartItemRequest;
 import net.ecommerce.microservices.user.dto.CartResponseDto;
+import net.ecommerce.microservices.user.entity.CartItem;
 import net.ecommerce.microservices.user.service.CartService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,9 +39,8 @@ public class CartController {
                 : ResponseEntity.badRequest().build();
     }
 
-    @GetMapping("cart")
-    public ResponseEntity<List<CartResponseDto>> retrieveCart(@RequestHeader("X-User-ID") String userId) {
-
+    @GetMapping("/viewCart")
+    public ResponseEntity<List<CartItem>> retrieveCart(@RequestHeader("X-User-ID") String userId) {
         return new ResponseEntity<>(cartService.retrieveUserCart(userId),HttpStatus.OK);
     }
 
