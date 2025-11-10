@@ -9,9 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>net.ecommerce</groupId>
-	<artifactId>ecommerce-microservices</artifactId>
+	<artifactId>ecommerce-microservices-User</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>EcommerceMicroservicesApp</name>
+    <packaging>pom</packaging>
+    <name>EcommerceMicroservicesApp</name>
 	<description>A production-ready eCommerce microservices platform built with Spring Boot, PostgreSQL, Docker, Kubernetes, Kafka, and resilient service architecture, designed for scalability, security, and real-world application.</description>
 	<url/>
 	<licenses>
@@ -20,7 +21,11 @@
 	<developers>
 		<developer/>
 	</developers>
-	<scm>
+    <modules>
+        <module>ecom-microservices-user</module>
+        <module>ecom-microservices-product</module>
+    </modules>
+    <scm>
 		<connection/>
 		<developerConnection/>
 		<tag/>
