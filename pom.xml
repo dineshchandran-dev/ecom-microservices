@@ -24,6 +24,8 @@
     <modules>
         <module>ecom-microservices-user</module>
         <module>ecom-microservices-product</module>
+        <module>order</module>
+        <module>ecom-microservices-order</module>
     </modules>
     <scm>
 		<connection/>

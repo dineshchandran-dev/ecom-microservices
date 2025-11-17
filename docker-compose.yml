@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  user-db:
+    image: postgres:16
+    container_name: user_ecom_postgres
+    environment:
+      POSTGRES_DB: User_ecom
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: dinesh123
+    ports:
+      - "5433:5432"   # Host 5433 → Container 5432
+    volumes:
+      - user_db_data:/var/lib/postgresql/data
+    restart: always
+
+  product-db:
+    image: postgres:16
+    container_name: product_db_postgres
+    environment:
+      POSTGRES_DB: product_db_ecom
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: dinesh123
+    ports:
+      - "5432:5432"   # Host 5432 → Container 5432
+    volumes:
+      - product_db_data:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  user_db_data:
+  product_db_data:
