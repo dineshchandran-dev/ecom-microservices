@@ -9,7 +9,7 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: dinesh123
     ports:
-      - "5433:5432"   # Host 5433 → Container 5432
+      - "5433:5432"
     volumes:
       - user_db_data:/var/lib/postgresql/data
     restart: always
@@ -22,11 +22,25 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: dinesh123
     ports:
-      - "5432:5432"   # Host 5432 → Container 5432
+      - "5435:5432"      # UPDATED PORT
     volumes:
       - product_db_data:/var/lib/postgresql/data
+    restart: always
+
+  order-db:
+    image: postgres:16
+    container_name: order_db_postgres
+    environment:
+      POSTGRES_DB: order_ecom
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: dinesh123
+    ports:
+      - "5434:5432"
+    volumes:
+      - order_db_data:/var/lib/postgresql/data
     restart: always
 
 volumes:
   user_db_data:
   product_db_data:
+  order_db_data:
