@@ -3,6 +3,7 @@ package net.ecommerce.user.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-@Document(collation = "users")
+@Document(collection = "user")
 public class User {
     @Id
 
@@ -29,7 +30,9 @@ public class User {
 
     private Address address;
 
+    @CreatedDate
     private LocalDateTime createdAt;
+    @CreatedDate
     private LocalDateTime UpdatedAt;
 
 
