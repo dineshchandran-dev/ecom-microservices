@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @GetMapping("/retrieve/{id}")
-    public ResponseEntity<UserResponseDto> retrieve(@PathVariable Long id) {
+    public ResponseEntity<UserResponseDto> retrieve(@PathVariable String id) {
 
 //        Optional<User> user= userService.retrieveUser(id);
 //        if(user==null){
@@ -49,7 +49,7 @@ public class UserController {
 
     }
     @PostMapping("/update/{id}")
-    public ResponseEntity<UserResponseDto> update(@PathVariable Long id, @RequestBody RequestDto user) {
+    public ResponseEntity<UserResponseDto> update(@PathVariable String id, @RequestBody RequestDto user) {
         return new ResponseEntity<>(userService.updateUserDetails(id,user),HttpStatus.OK);
     }
 

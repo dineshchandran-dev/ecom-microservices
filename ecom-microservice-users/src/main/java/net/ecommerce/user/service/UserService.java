@@ -29,9 +29,9 @@ public class UserService {
         return userRepository.findAll().stream().map(this::mapTOUserDto).collect(Collectors.toList());
     }
 
-    public Optional<UserResponseDto> retrieveUser(Long id) {
+    public Optional<UserResponseDto> retrieveUser(String id) {
 
-        return userRepository.findById(id).map(this::mapTOUserDto);
+        return userRepository.findById(String.valueOf(id)).map(this::mapTOUserDto);
     }
 
 //    public Optional<UserResponseDto> updateUserDetails(User user) {
@@ -100,8 +100,8 @@ public class UserService {
 //                });
 //    }
 
-    public UserResponseDto updateUserDetails(Long id, RequestDto requestDto){
-        return  userRepository.findById(id).map(existing->{
+    public UserResponseDto updateUserDetails(String id, RequestDto requestDto){
+        return  userRepository.findById(String.valueOf(id)).map(existing->{
             mapToUpdateUser(existing,requestDto);
             User saved=userRepository.save(existing);
             return mapTOUserDto(saved);

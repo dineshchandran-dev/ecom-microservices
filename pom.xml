@@ -14,17 +14,18 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Java -->
+        <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <java.version>17</java.version>
-
-        <!-- Spring Boot BOM version -->
         <spring.boot.version>3.2.0</spring.boot.version>
 
-        <!-- plugin versions -->
         <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
         <spring.boot.maven.plugin.version>3.2.0</spring.boot.maven.plugin.version>
         <maven.surefire.plugin.version>3.0.0</maven.surefire.plugin.version>
+
+        <lombok.version>1.18.42</lombok.version>
     </properties>
 
     <!-- Import Spring Boot dependency management (BOM) -->
@@ -44,65 +45,49 @@
         <module>ecom-microservice-order</module>
         <module>ecom-microservice-product</module>
         <module>ecom-microservice-users</module>
+        <module>configserver</module>
     </modules>
 
     <build>
-        <!-- Ensure IDE and Maven use these plugin defaults -->
         <pluginManagement>
             <plugins>
-
-                <!-- Compiler plugin (configured centrally) -->
+                <!-- Compiler plugin -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven.compiler.plugin.version}</version>
                     <configuration>
-                        <!-- source/target kept for tools that read them -->
-                        <source>${maven.compiler.source}</source>
-                        <target>${maven.compiler.target}</target>
-
                         <release>${java.version}</release>
-
-                        <!-- Provide Lombok to annotation processors when building -->
                         <annotationProcessorPaths>
                             <path>
                                 <groupId>org.projectlombok</groupId>
                                 <artifactId>lombok</artifactId>
-                                <version>1.18.28</version>
+                                <version>${lombok.version}</version>
                             </path>
                         </annotationProcessorPaths>
-
                         <compilerArgs>
                             <arg>-parameters</arg>
                         </compilerArgs>
                     </configuration>
                 </plugin>
 
-                <!-- Spring Boot maven plugin defaults -->
+                <!-- Spring Boot plugin -->
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>${spring.boot.maven.plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>repackage</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                 </plugin>
 
-                <!-- Surefire for tests -->
+                <!-- Surefire -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven.surefire.plugin.version}</version>
                 </plugin>
-
             </plugins>
         </pluginManagement>
 
-        <!-- Also add the compiler plugin as an active plugin so IDEs pick up the release flag -->
+        <!-- activate compiler plugin so IDEs pick up the release flag -->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -114,7 +99,7 @@
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>1.18.28</version>
+                            <version>${lombok.version}</version>
                         </path>
                     </annotationProcessorPaths>
                     <compilerArgs>
@@ -124,5 +109,15 @@
             </plugin>
         </plugins>
     </build>
+
+    <!-- Parent-level dependencies for inheritance if you want (optional) -->
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
 </project>
