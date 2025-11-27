@@ -45,6 +45,7 @@
         <module>ecom-microservice-order</module>
         <module>ecom-microservice-product</module>
         <module>ecom-microservice-users</module>
+        <module>configserver</module>
     </modules>
 
     <build>
